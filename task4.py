@@ -1,16 +1,11 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 # Входные и выходные данные хранятся в отдельных текстовых файлах.
-import re
 res = ""
 with open('rle.txt', 'r',encoding='utf-8') as data:
     for line in data:
-        # lst.append(line)
         res = res + line
 
 print(res)
-# res = []
-# res = str(lst).strip("[']")
-# print(res, ':len -> ', len(res))
 
 # шифратор:  1-ый символ признак: 0- не повторяющаяся/1- повторяющаяся  последовательность.
 # 2-ой длина для неповт. последовательности и количество символов для повторяющейся  
@@ -63,18 +58,15 @@ def shifr(txt):
     else:
         if count != 1:
             res = res + '1' + str(count) + txt[i]
-    # print(f'{res}, i -> {i}, tmp -> "{tmp}", cnt -> {cnt}, count -> {count}')
     return res
 # дешифруем
 def deshifr(txt):
     rs = ''
     count = len(txt)
-    # print(count)
     i = 0
     while count > 0:
         pr = int(txt[i])
         number = int(txt[i+1])
-        # print('pr - ',pr, 'number - ', number, 'count -', count)
         if pr == 1:
             rs = rs + txt[i + 2] * number
             count -= 3
@@ -86,29 +78,18 @@ def deshifr(txt):
             while number > 0:
                 rs = rs + txt[j + 2]
                 number -= 1
-                # print(rs, 'i->', j, number)
                 j += 1
-        # print(rs, 'i->', i, 'count -', count)
     return rs
 
 result = shifr(res)
 print(result)
 print(deshifr(result))
-# with open('rle.txt', 'a', encoding='utf-8') as file:
-#     file.write('\shifr\n')
-#     for i in range(len(result)):
-#         file.write(result[i])
+
 with open('shifr.txt', 'w',encoding='utf-8') as file:
     for i in range(len(result)):
         file.write(result[i])
 finish = deshifr(result)
-# res_str = finish.replace("'", "", 1)
-# res_str = finish.replace("'", "", -1)
 
-# with open('rle.txt', 'a', encoding='utf-8') as file:
-#     file.write('\ndeshifr\n')
-#     for i in range(len(result)):
-#         file.write(result[i])       
 with open('deshifr.txt', 'w',encoding='utf-8') as file:
     for i in range(len(finish)):
         file.write(finish[i])
