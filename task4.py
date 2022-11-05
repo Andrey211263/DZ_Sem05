@@ -113,5 +113,3 @@ with open('deshifr.txt', 'w',encoding='utf-8') as file:
     for i in range(len(finish)):
         file.write(finish[i])
 
-# При использовании во входном файле символа '\', после прогона strip он задваивается, 
-# я не разобрался почему
