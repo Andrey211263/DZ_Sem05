@@ -7,8 +7,8 @@ lst = ['фырмф', 'лдцг', 'бцвуцауы', 'опа',
        'ы', 'ка', 'ааукуа', 'аппрбв', 'ывроавб']
 # str = []
 # for i in range(0, len(lst), 1):
-#     a = lst[i]
-#     if('а'and'б'and'в') in a:
+#     a = lst[i].lower()
+#     if 'б' in a and 'а' in a and 'в'  in a:
 #         print(i, 'абв - есть')
 #     else:
 #         str.append(lst[i])
@@ -28,7 +28,7 @@ print(*lst)
 count = len(lst)
 i = 0
 while count > 0:
-    a = lst[i]
+    a = lst[i].lower()
     # print(f'{lst[i]} i, count -> {i}, {count}')
     if 'б' in a and 'а' in a and 'в'  in a:
         del lst[i]

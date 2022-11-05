@@ -1,23 +1,24 @@
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
 # Входные и выходные данные хранятся в отдельных текстовых файлах.
 import re
-lst = []
+res = ""
 with open('rle.txt', 'r',encoding='utf-8') as data:
     for line in data:
-        lst.append(line)
+        # lst.append(line)
+        res = res + line
 
-print(lst)
-res = []
-res = str(lst).strip("[']")
+print(res)
+# res = []
+# res = str(lst).strip("[']")
 # print(res, ':len -> ', len(res))
 
 # шифратор:  1-ый символ признак: 0- не повторяющаяся/1- повторяющаяся  последовательность.
 # 2-ой длина для неповт. последовательности и количество символов для повторяющейся  
 
 def shifr(txt):
-    count = 1   # счетчик дублей
+    count = 1   # счетчик дублей, ограничение 9
     res = '' 
-    cnt = 0     # кол-во не совпадающих
+    cnt = 0     # кол-во не совпадающих, ограничение 9
     tmp = ''    # буфер для несовпадающих элементов
     for i in range(len(txt) - 1):
         if txt[i] != txt[i+1]:
@@ -28,12 +29,25 @@ def shifr(txt):
             else:
                 tmp += txt[i]
                 cnt += 1
+                if cnt == 9:
+                    res = res + '0' + str(cnt) + tmp
+                    cnt = 0
+                    tmp = ''
+                
+
         else:
             if cnt != 0:
                 res = res + '0' + str(cnt) + tmp
                 cnt = 0
                 tmp = ''
-            count += 1
+            
+            if count == 9:
+                res = res + '1' + str(count) + txt[i]
+                count = 1
+            else:
+                count += 1
+
+
     # обработка последнего элемента     
     if txt[-2] != txt[-1]:
         if count != 1:      #провекрка количества повторяющихся элементов
